@@ -1,10 +1,10 @@
-package com.example.examplemod;
+package io.github.yuko1101.allfivestars;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.impl.util.log.Log;
 import net.fabricmc.loader.impl.util.log.LogCategory;
 
-public class ExampleMod implements ModInitializer {
+public class AllFiveStarsMod implements ModInitializer {
 
     public static final String MOD_NAME = "ExampleMod";
 

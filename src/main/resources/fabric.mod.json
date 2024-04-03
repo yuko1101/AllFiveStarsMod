@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "allfivestars",
   "version": "${version}",
-  "name": "ExampleMod",
-  "description": "Your mod description.",
+  "name": "AllFiveStars",
+  "description": "A LunarCore mod makes all your pulls 5 stars.",
   "authors": [
-    "You"
+    "yuko1101"
   ],
   "contact": {
-    "website": "https://example.com",
-    "repo": "https://example.com/you/your_repo"
+    "website": "https://github.com/yuko1101/AllFiveStarsMod",
+    "repo": "https://github.com/yuko1101/AllFiveStarsMod"
   },
   "license": "MIT",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "assets/allfivestars/icon.png",
   "environment": "server",
   "entrypoints": {
     "main": [
-      "com.example.examplemod.ExampleMod"
+      "io.github.yuko1101.allfivestars.AllFiveStarsMod"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json"
+    "allfivestars.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
