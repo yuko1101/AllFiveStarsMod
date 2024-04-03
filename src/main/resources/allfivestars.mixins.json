@@ -4,6 +4,7 @@
   "package": "io.github.yuko1101.allfivestars.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "GachaServiceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
