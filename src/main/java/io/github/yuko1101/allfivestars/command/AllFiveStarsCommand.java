@@ -21,7 +21,7 @@ public class AllFiveStarsCommand implements CommandHandler {
         String subcommand = args.split(" ")[0];
         switch (subcommand.toLowerCase()) {
             case "help":
-                commandArgs.sendMessage("/allfivestars <help|toggle|pickupchance> ...");
+                commandArgs.sendMessage("/allfivestars <help|toggle|pickupchance|fivestarschance> ...");
                 break;
             case "toggle":
                 ConfigManager.setIsEnabled(!ConfigManager.isEnabled());
@@ -39,6 +39,19 @@ public class AllFiveStarsCommand implements CommandHandler {
                 }
                 ConfigManager.setPickupChance(pickupChance);
                 commandArgs.sendMessage("Set option \"pickupChance\" to " + ConfigManager.getPickupChance() + ". (default is -1)");
+                break;
+            case "fivestarschance":
+                int fiveStarsChance = -1;
+                if (args.split(" ").length > 1) {
+                    try {
+                        fiveStarsChance = Integer.parseInt(args.split(" ")[1]);
+                    } catch (NumberFormatException e) {
+                        commandArgs.sendMessage("Invalid number.");
+                        return;
+                    }
+                }
+                ConfigManager.setFiveStarsChance(fiveStarsChance);
+                commandArgs.sendMessage("Set option \"fiveStarsChance\" to " + ConfigManager.getFiveStarsChance() + ", or " + (((double) ConfigManager.getFiveStarsChance()) / 100) + "%. (default is -1)");
                 break;
             default:
                 commandArgs.sendMessage("Unknown subcommand. Use /allfivestars help for more information.");

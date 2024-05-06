@@ -30,6 +30,20 @@ public class ConfigManager {
             throw new RuntimeException(e);
         }
     }
+    public static int getFiveStarsChance() {
+        if (!configFile.has("fiveStarsChance")) {
+            setFiveStarsChance(10000);
+        }
+        return configFile.getValue("fiveStarsChance").getAsInt();
+    }
+    public static void setFiveStarsChance(int fiveStarsChance) {
+        try {
+            configFile.set("fiveStarsChance", fiveStarsChance);
+            configFile.save();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static boolean isEnabled() {
         if (!configFile.has("isEnabled")) {
             setIsEnabled(true);
