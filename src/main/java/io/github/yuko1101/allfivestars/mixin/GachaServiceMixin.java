@@ -2,7 +2,6 @@ package io.github.yuko1101.allfivestars.mixin;
 
 import emu.lunarcore.game.gacha.GachaBanner;
 import emu.lunarcore.game.gacha.GachaService;
-import emu.lunarcore.game.gacha.PlayerGachaBannerInfo;
 import io.github.yuko1101.allfivestars.config.ConfigManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
