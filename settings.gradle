@@ -1,8 +1,14 @@
 pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.toString() == "io.github.lunarcoremods.gradlerunner") {
+                useModule("com.github.LunarCore-Mods:GradleRunner:${requested.version}")
+            }
+        }
+    }
     repositories {
         maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
+            url = "https://jitpack.io"
         }
         gradlePluginPortal()
     }
