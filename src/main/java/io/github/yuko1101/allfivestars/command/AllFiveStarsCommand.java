@@ -12,49 +12,47 @@ import io.github.yuko1101.allfivestars.config.ConfigManager;
 )
 public class AllFiveStarsCommand implements CommandHandler {
     @Override
-    public void execute(CommandArgs commandArgs) {
-        String args = commandArgs.getRaw();
-        if (args.isEmpty()) {
-            commandArgs.sendMessage("You need to specify a subcommand. Use /allfivestars help for more information.");
+    public void execute(CommandArgs args) {
+        if (args.size() == 0) {
+            args.sendMessage("You need to specify a subcommand. Use /allfivestars help for more information.");
             return;
         }
-        String subcommand = args.split(" ")[0];
-        switch (subcommand.toLowerCase()) {
+        switch (args.get(0).toLowerCase()) {
             case "help":
-                commandArgs.sendMessage("/allfivestars <help|toggle|pickupchance|fivestarschance> ...");
+                args.sendMessage("/allfivestars <help|toggle|pickupchance|fivestarschance> ...");
                 break;
             case "toggle":
                 ConfigManager.setIsEnabled(!ConfigManager.isEnabled());
-                commandArgs.sendMessage("Toggled AllFiveStars Mod. Status: " + (ConfigManager.isEnabled() ? "Enabled" : "Disabled"));
+                args.sendMessage("Toggled AllFiveStars Mod. Status: " + (ConfigManager.isEnabled() ? "Enabled" : "Disabled"));
                 break;
             case "pickupchance":
                 int pickupChance = -1;
-                if (args.split(" ").length > 1) {
+                if (args.size() > 1) {
                     try {
-                        pickupChance = Integer.parseInt(args.split(" ")[1]);
+                        pickupChance = Integer.parseInt(args.get(1));
                     } catch (NumberFormatException e) {
-                        commandArgs.sendMessage("Invalid number.");
+                        args.sendMessage("Invalid number.");
                         return;
                     }
                 }
                 ConfigManager.setPickupChance(pickupChance);
-                commandArgs.sendMessage("Set option \"pickupChance\" to " + ConfigManager.getPickupChance() + ". (default is -1)");
+                args.sendMessage("Set option \"pickupChance\" to " + ConfigManager.getPickupChance() + ". (default is -1)");
                 break;
             case "fivestarschance":
                 int fiveStarsChance = -1;
-                if (args.split(" ").length > 1) {
+                if (args.size() > 1) {
                     try {
-                        fiveStarsChance = Integer.parseInt(args.split(" ")[1]);
+                        fiveStarsChance = Integer.parseInt(args.get(1));
                     } catch (NumberFormatException e) {
-                        commandArgs.sendMessage("Invalid number.");
+                        args.sendMessage("Invalid number.");
                         return;
                     }
                 }
                 ConfigManager.setFiveStarsChance(fiveStarsChance);
-                commandArgs.sendMessage("Set option \"fiveStarsChance\" to " + ConfigManager.getFiveStarsChance() + ", or " + (((double) ConfigManager.getFiveStarsChance()) / 100) + "%. (default is -1)");
+                args.sendMessage("Set option \"fiveStarsChance\" to " + ConfigManager.getFiveStarsChance() + ", or " + (((double) ConfigManager.getFiveStarsChance()) / 100) + "%. (default is -1)");
                 break;
             default:
-                commandArgs.sendMessage("Unknown subcommand. Use /allfivestars help for more information.");
+                args.sendMessage("Unknown subcommand. Use /allfivestars help for more information.");
         }
     }
 }
