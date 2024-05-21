@@ -49,10 +49,6 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
-java {
-    withSourcesJar()
-}
-
 jar {
     archiveBaseName.set(archives_base_name)
     from("LICENSE") {
