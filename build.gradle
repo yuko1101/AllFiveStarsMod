@@ -59,7 +59,3 @@ jar {
         rename { "${it}_${archives_base_name}"}
     }
 }
-
-sourcesJar {
-    archiveBaseName.set(archives_base_name)
-}
