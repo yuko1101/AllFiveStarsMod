@@ -31,7 +31,7 @@ public class AllFiveStarsCommand implements CommandHandler {
                     try {
                         pickupChance = Integer.parseInt(args.get(1));
                     } catch (NumberFormatException e) {
-                        args.sendMessage("Invalid number.");
+                        args.sendMessage("Invalid number. /allfivestars pickupchance <number>");
                         return;
                     }
                 }
@@ -44,7 +44,7 @@ public class AllFiveStarsCommand implements CommandHandler {
                     try {
                         fiveStarsChance = Integer.parseInt(args.get(1));
                     } catch (NumberFormatException e) {
-                        args.sendMessage("Invalid number.");
+                        args.sendMessage("Invalid number. /allfivestars fivestarschance <number>");
                         return;
                     }
                 }
