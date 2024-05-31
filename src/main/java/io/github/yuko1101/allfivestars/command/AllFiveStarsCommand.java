@@ -19,38 +19,72 @@ public class AllFiveStarsCommand implements CommandHandler {
         }
         switch (args.get(0).toLowerCase()) {
             case "help":
-                args.sendMessage("/allfivestars <help|toggle|pickupchance|fivestarschance> ...");
+                args.sendMessage("/allfivestars <help|toggle|pickupchance|basechance> ...");
                 break;
             case "toggle":
                 ConfigManager.setIsEnabled(!ConfigManager.isEnabled());
                 args.sendMessage("Toggled AllFiveStars Mod. Status: " + (ConfigManager.isEnabled() ? "Enabled" : "Disabled"));
                 break;
-            case "pickupchance":
+            case "pickupchance": {
+                if (args.size() < 2) {
+                    args.sendMessage("Invalid arguments. /allfivestars pickupchance [stars] (chance)");
+                    return;
+                }
                 int pickupChance = -1;
-                if (args.size() > 1) {
-                    try {
-                        pickupChance = Integer.parseInt(args.get(1));
-                    } catch (NumberFormatException e) {
-                        args.sendMessage("Invalid number. /allfivestars pickupchance <number>");
-                        return;
+                int stars;
+                try {
+                    stars = Integer.parseInt(args.get(1));
+                    if (args.size() > 2) {
+                        pickupChance = Integer.parseInt(args.get(2));
                     }
+                } catch (NumberFormatException e) {
+                    args.sendMessage("Invalid arguments. /allfivestars pickupchance [stars] (chance)");
+                    return;
                 }
-                ConfigManager.setPickupChance(pickupChance);
-                args.sendMessage("Set option \"pickupChance\" to " + ConfigManager.getPickupChance() + ". (default is -1)");
+
+                if (stars < 4 || 5 < stars) {
+                    args.sendMessage("Invalid stars. Stars must be 4 or 5.");
+                    return;
+                }
+
+                ConfigManager.getChanceConfig(stars).setPickupChance(pickupChance);
+                if (pickupChance == -1) {
+                    args.sendMessage("Reset option \"pickupChance\" for " + stars + " stars to the default");
+                } else {
+                    args.sendMessage("Set option \"pickupChance\" for " + stars + " stars to " + pickupChance + ". (default is -1)");
+                }
                 break;
-            case "fivestarschance":
-                int fiveStarsChance = -1;
-                if (args.size() > 1) {
-                    try {
-                        fiveStarsChance = Integer.parseInt(args.get(1));
-                    } catch (NumberFormatException e) {
-                        args.sendMessage("Invalid number. /allfivestars fivestarschance <number>");
-                        return;
+            }
+            case "basechance": {
+                if (args.size() < 2) {
+                    args.sendMessage("Invalid arguments. /allfivestars basechance [stars] (baseChance)");
+                    return;
+                }
+                int baseChance = -1;
+                int stars;
+                try {
+                    stars = Integer.parseInt(args.get(1));
+                    if (args.size() > 2) {
+                        baseChance = Integer.parseInt(args.get(2));
                     }
+                } catch (NumberFormatException e) {
+                    args.sendMessage("Invalid arguments. /allfivestars baseChance [stars] (baseChance)");
+                    return;
                 }
-                ConfigManager.setFiveStarsChance(fiveStarsChance);
-                args.sendMessage("Set option \"fiveStarsChance\" to " + ConfigManager.getFiveStarsChance() + ", or " + (((double) ConfigManager.getFiveStarsChance()) / 100) + "%. (default is -1)");
+
+                if (stars < 4 || 5 < stars) {
+                    args.sendMessage("Invalid stars. Stars must be 4 or 5.");
+                    return;
+                }
+
+                ConfigManager.getChanceConfig(stars).setBaseChance(baseChance);
+                if (baseChance == -1) {
+                    args.sendMessage("Reset option \"baseChance\" for " + stars + " stars to the default");
+                } else {
+                    args.sendMessage("Set option \"baseChance\" for " + stars + " stars to " + baseChance + ", or " + (((double) baseChance) / 100) + "%. (default is -1)");
+                }
                 break;
+            }
             default:
                 args.sendMessage("Unknown subcommand. Use /allfivestars help for more information.");
         }
